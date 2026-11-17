@@ -1,15 +1,11 @@
-import { CakeSlice, Camera, Coffee, CupSoda, Croissant, Cookie } from "lucide-react";
-import { galleryItems } from "../data";
+
 import Reveal from "./Reveal";
 
-const itemIcons: Record<string, typeof Coffee> = {
-  g1: CupSoda,
-  g2: Croissant,
-  g3: Coffee,
-  g4: Camera,
-  g5: CakeSlice,
-  g6: Cookie,
-};
+const photos = [
+  { src: "/images/exterior.jpg", alt: "نمای بیرونی کافه یشیل او" },
+  { src: "/images/interior-1.jpg", alt: "فضای داخلی کافه" },
+  { src: "/images/interior-2.jpg", alt: "چیدمان داخلی کافه" },
+];
 
 export default function Gallery() {
   return (
@@ -17,35 +13,16 @@ export default function Gallery() {
       <div className="container">
         <Reveal>
           <div className="section-head section-head--center">
-            <span className="section-eyebrow">Gallery</span>
-            <h2 className="section-title">Moments from the café</h2>
-            <p className="section-intro">
-              A peek at the warmth, the craft and the little details that make
-              Moka feel like home.
-            </p>
+            <span className="section-eyebrow">گالری تصاویر</span>
+            <h2 className="section-title">نگاهی به فضای یشیل او</h2>
           </div>
         </Reveal>
-
-        <div className="gallery__grid">
-          {galleryItems.map((item) => {
-            const Icon = itemIcons[item.id] ?? Coffee;
-            return (
-              <Reveal key={item.id}>
-                <div
-                  className={`gallery__item ${item.tone} ${
-                    item.span === "tall"
-                      ? "gallery__item--tall"
-                      : item.span === "wide"
-                        ? "gallery__item--wide"
-                        : ""
-                  }`}
-                >
-                  <Icon size={44} strokeWidth={1.4} />
-                  <span>{item.label}</span>
-                </div>
-              </Reveal>
-            );
-          })}
+        <div className="yesil-gallery">
+          {photos.map((photo) => (
+            <Reveal key={photo.src}>
+              <img src={photo.src} alt={photo.alt} />
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

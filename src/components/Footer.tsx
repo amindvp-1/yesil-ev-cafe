@@ -1,16 +1,18 @@
-import { Coffee } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <a href="#home" className="brand">
-          <Coffee className="brand__icon" size={20} />
-          Moka <em>Café</em>
+          <img
+            src="/images/logo.jpg"
+            alt="لوگوی یشیل او"
+            className="brand__logo"
+          />
+          <span>یشیل او</span>
         </a>
         <p className="footer__copy">
-          © {new Date().getFullYear()} Moka Café. Brewed with care, served with
-          love.
+          © {new Date().getFullYear()} کافه یشیل او | تمامی حقوق محفوظ است.
         </p>
       </div>
     </footer>

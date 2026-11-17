@@ -1,11 +1,13 @@
+
 import { useEffect, useState } from "react";
-import { Coffee, Menu as MenuIcon, X } from "lucide-react";
+import { Menu as MenuIcon, X } from "lucide-react";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Menu", href: "#menu" },
-  { label: "Contact", href: "#contact" },
+  { label: "خانه", href: "#home" },
+  { label: "درباره ما", href: "#about" },
+  { label: "منوی کافه", href: "#menu" },
+  { label: "گالری", href: "#gallery" },
+  { label: "تماس با ما", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -15,6 +17,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -23,45 +26,55 @@ export default function Navbar() {
     <>
       <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
         <div className="container navbar__inner">
-          <a href="#home" className="brand" onClick={() => setOpen(false)}>
-            <Coffee className="brand__icon" size={24} strokeWidth={2.2} />
-            Moka <em>Café</em>
-          </a>
+          <nav className="navbar__navigation">
+            <ul className="navbar__links">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <a className="navbar__link" href={link.href}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          <ul className="navbar__links">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a className="navbar__link" href={link.href}>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <a href="#menu" className="btn btn-primary navbar__cta">
-            Order Now
+          <a
+            href="#home"
+            className="brand"
+            onClick={() => setOpen(false)}
+          >
+            <span className="brand__name">یشیل او</span>
+            <img
+              src="/images/logo.jpg"
+              alt="لوگوی کافه یشیل او"
+              className="brand__logo"
+            />
           </a>
 
           <button
             className="navbar__burger"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? "بستن منو" : "باز کردن منو"}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen((value) => !value)}
           >
             {open ? <X size={26} /> : <MenuIcon size={26} />}
           </button>
         </div>
       </header>
 
-      <nav className={`mobile-menu ${open ? "mobile-menu--open" : ""}`} aria-hidden={!open}>
+      <nav
+        className={`mobile-menu ${open ? "mobile-menu--open" : ""}`}
+        aria-hidden={!open}
+      >
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          <a
+            key={link.href}
+            href={link.href}
+            onClick={() => setOpen(false)}
+          >
             {link.label}
           </a>
         ))}
-        <a href="#menu" onClick={() => setOpen(false)}>
-          Order Now
-        </a>
       </nav>
     </>
   );
